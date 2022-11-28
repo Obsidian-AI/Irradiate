@@ -268,9 +268,8 @@ class CommandCenter(Commands):
             if self.targetSet:
                 if command == 'sysinfo':
                     self.conn.send(str.encode('sysinfo'))
-                    recieve = self.conn.recv(20480)
-                    self.sysinfo(recieve)
-                elif command == 'exit':
+                    self.sysinfo(self.conn.recv(20480))
+                elif command == 'exit session':
                     self.conn = None
                     self.targetSet = False
                     self.cli = ">> "
