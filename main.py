@@ -273,7 +273,8 @@ class CommandCenter(Commands):
                     self.conn = None
                     self.targetSet = False
                     self.cli = ">> "
-                    print("Exitted System")
+                    logging.info("Exitted Session")
+                    print("Exitted Session")
                 else:
                     try:
                         self.conn.send(str.encode(command))
@@ -301,6 +302,7 @@ class CommandCenter(Commands):
                     except BrokenPipeError:
                         print("\nConnection Disrupted...")
                         print("Please Select a New Target")
+                        logging.warning("Connection Disrupted")
                         self.conn = None
                         self.targetSet = False
                         self.cli = f"{Fore.GREEN}>> {Style.RESET_ALL}"
