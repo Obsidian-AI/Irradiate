@@ -1,0 +1,56 @@
+root - INFO - [Sys]: Verifying User Arguements
+root - INFO - [Sys]: Verified User Arguements
+root - INFO - [Sys]: Setting ngrok server up
+pyngrok.process - INFO - Updating authtoken for default "config_path" of "ngrok_path": /Users/karthiknadimpally/opt/anaconda3/lib/python3.8/site-packages/pyngrok/bin/ngrok
+root - INFO - [Sys]: Finished Setting up ngrok server
+root - INFO - [Sys]: Starting Server
+root - INFO - [Sys]: Created TCP Socket
+root - INFO - [Sys]: Binded Socket to Port
+root - INFO - [Sys]: Creating ngrok server
+pyngrok.ngrok - INFO - Opening tunnel named: tcp-8080-b06192ce-1115-4109-ba6f-112ee1958ee6
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="no configuration paths supplied"
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="using configuration at default config path" path=/Users/karthiknadimpally/.ngrok2/ngrok.yml
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="open config file" path=/Users/karthiknadimpally/.ngrok2/ngrok.yml err=nil
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="tunnel session started" obj=tunnels.session
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="client session established" obj=csess id=0a20ed14d563
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg=start pg=/api/tunnels id=3d4a6c100b9084b3
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg=end pg=/api/tunnels id=3d4a6c100b9084b3 status=200 dur=236.457µs
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg=start pg=/api/tunnels id=5fc3f69c71370d81
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg=end pg=/api/tunnels id=5fc3f69c71370d81 status=200 dur=43.214µs
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg=start pg=/api/tunnels id=2944c038405af0f4
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg="started tunnel" obj=tunnels name=tcp-8080-b06192ce-1115-4109-ba6f-112ee1958ee6 addr=//localhost:8080 url=tcp://4.tcp.ngrok.io:14039
+root - INFO - [Sys]: Created Ngrok Server at tcp://4.tcp.ngrok.io:14039
+root - INFO - Running the Generator
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:36-0500 lvl=info msg=end pg=/api/tunnels id=2944c038405af0f4 status=201 dur=58.177166ms
+root - INFO - Created Payload at /Users/karthiknadimpally/Desktop/kris.py
+root - INFO - [Sys]: Started Client Handler
+root - INFO - [Sys]: Created Thread for Client Handler
+root - INFO - Started CLI
+root - INFO - [Sys]: New Connection
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:37-0500 lvl=info msg="join connections" obj=join id=a7642fa9a68d l=127.0.0.1:8080 r=69.23.208.153:63217
+root - INFO - [Sys]: New Connection
+pyngrok.process.ngrok - INFO - t=2022-11-27T22:59:38-0500 lvl=info msg="join connections" obj=join id=9d0a79490afc l=127.0.0.1:8080 r=69.23.208.153:63220
+root - INFO - [User]: 
+root - INFO - [User]: list
+root - INFO - [User]: list
+root - INFO - [User]: list
+root - INFO - [User]: select 0
+root - INFO - [User]: sysinfo
+root - INFO - [User]: this is strupid
+root - INFO - [User]: i am sending data to the server
+root - INFO - [User]: exit
+root - INFO - [User]: select 12
+root - INFO - [User]: select 1
+root - INFO - [User]: i am sending data to the server
+root - INFO - [User]: my bad, i meant the client
+root - INFO - [User]: this is a test to see the data being sent to the client
+root - INFO - [User]: cool
+root - INFO - [User]: exit
+root - INFO - [User]: sysinfo
+root - INFO - [User]: info
+root - INFO - [User]: lsit
+root - INFO - [User]: list
+pyngrok.process.ngrok - INFO - t=2022-11-27T23:01:28-0500 lvl=info msg="received stop request" obj=app stopReq="{err:<nil> restart:false}"
+pyngrok.process.ngrok - INFO - t=2022-11-27T23:01:28-0500 lvl=info msg="session closing" obj=tunnels.session err=nil
+pyngrok.process.ngrok - INFO - t=2022-11-27T23:01:28-0500 lvl=info msg="accept failed" obj=csess id=0a20ed14d563 err="reconnecting session closed"
