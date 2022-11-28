@@ -1,5 +1,7 @@
 pyngrok
 threading
 colorama
+threading
 argparse
 os
+socket

