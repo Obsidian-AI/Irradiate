@@ -51,7 +51,7 @@ class Client(CommandHandler):
                 self.sock.send(data.encode())
 
 def main():
-    client = Client()
+    Client()
 
 if __name__ == '__main__':
     main()
