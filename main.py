@@ -282,7 +282,6 @@ class Commands():
                 conn.settimeout(None)
                 file.close()
 
-
 class CommandCenter(Commands):
     def __init__(self, sock: socket.socket) -> None:
         """
