@@ -7,27 +7,27 @@ root - INFO - [Sys]: Starting Server
 root - INFO - [Sys]: Created TCP Socket
 root - INFO - [Sys]: Binded Socket to Port
 root - INFO - [Sys]: Creating ngrok server
-pyngrok.ngrok - INFO - Opening tunnel named: tcp-4444-8472168b-5a19-4de8-84f3-68c834eba934
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="no configuration paths supplied"
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="using configuration at default config path" path=/Users/karthiknadimpally/.ngrok2/ngrok.yml
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="open config file" path=/Users/karthiknadimpally/.ngrok2/ngrok.yml err=nil
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="tunnel session started" obj=tunnels.session
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="client session established" obj=csess id=80f7c991ebc3
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg=start pg=/api/tunnels id=3dd74018ab9f2c77
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg=end pg=/api/tunnels id=3dd74018ab9f2c77 status=200 dur=265.265µs
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg=start pg=/api/tunnels id=f016a20a8d9d011e
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg=end pg=/api/tunnels id=f016a20a8d9d011e status=200 dur=89.553µs
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg=start pg=/api/tunnels id=219db9729600ae33
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg="started tunnel" obj=tunnels name=tcp-4444-8472168b-5a19-4de8-84f3-68c834eba934 addr=//localhost:4444 url=tcp://0.tcp.ngrok.io:17088
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:29-0500 lvl=info msg=end pg=/api/tunnels id=219db9729600ae33 status=201 dur=54.508151ms
-root - INFO - [Sys]: Created Ngrok Server at tcp://0.tcp.ngrok.io:17088
+pyngrok.ngrok - INFO - Opening tunnel named: tcp-8080-d8928694-a6b4-4e0a-9199-a8df4559e9c9
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="no configuration paths supplied"
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="using configuration at default config path" path=/Users/karthiknadimpally/.ngrok2/ngrok.yml
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="open config file" path=/Users/karthiknadimpally/.ngrok2/ngrok.yml err=nil
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="tunnel session started" obj=tunnels.session
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="client session established" obj=csess id=151175046da6
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg=start pg=/api/tunnels id=52e8df382703b2bd
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg=end pg=/api/tunnels id=52e8df382703b2bd status=200 dur=459.464µs
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg=start pg=/api/tunnels id=2b4f18dd129c4c27
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg=end pg=/api/tunnels id=2b4f18dd129c4c27 status=200 dur=98.913µs
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg=start pg=/api/tunnels id=1e43bae0df8f032a
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="started tunnel" obj=tunnels name=tcp-8080-d8928694-a6b4-4e0a-9199-a8df4559e9c9 addr=//localhost:8080 url=tcp://2.tcp.ngrok.io:14898
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg=end pg=/api/tunnels id=1e43bae0df8f032a status=201 dur=93.100723ms
+root - INFO - [Sys]: Created Ngrok Server at tcp://2.tcp.ngrok.io:14898
 root - INFO - Running the Generator
 root - INFO - Created Payload at /Users/karthiknadimpally/Desktop/kris.py
 root - INFO - [Sys]: Started Client Handler
 root - INFO - [Sys]: Created Thread for Client Handler
 root - INFO - Started CLI
 root - INFO - [Sys]: New Connection
-pyngrok.process.ngrok - INFO - t=2022-11-28T21:24:30-0500 lvl=info msg="join connections" obj=join id=ce34ee40cf42 l=127.0.0.1:4444 r=69.23.208.153:63899
+pyngrok.process.ngrok - INFO - t=2022-12-05T12:47:31-0500 lvl=info msg="join connections" obj=join id=f961688df548 l=127.0.0.1:8080 r=173.244.217.86:35208
 root - INFO - [User]: select 0
 root - INFO - [User]: shell

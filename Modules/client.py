@@ -6,7 +6,7 @@ import socket
 import subprocess
 import os
 import shutil
-import sys
+
 from sys import *
 from os import remove
 import json

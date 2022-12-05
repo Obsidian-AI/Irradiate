@@ -287,12 +287,19 @@ class Commands():
                 conn.settimeout(1)
 
                 # Write the Data to the File
+                counter = 0
+                count = 0
                 while data:
-                    file.write(data)
                     try:
+                        if count == 0:
+                            file.write(data)
+                        count = 0
                         data = conn.recv(1024)
                     except socket.timeout as e:
-                        break
+                        counter += 1
+                        count += 1
+                        if counter > 1:
+                            break
 
                 # Reset the File
                 conn.settimeout(None)
