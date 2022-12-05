@@ -219,7 +219,17 @@ class ClientHandler():
                 print("Error Accepting Connections")
 
 class HelpCenter():
-    def sessionHelp(self) -> None:
+    def selectHelp(self) -> str:
+        """
+        Handles the overall help menu when selecting a session
+
+        Returns:
+            str: The String to print for the help menu
+        """
+
+        return f"Commands:\n    -{Fore.BLUE}help{Style.RESET_ALL}: Show this menu\n    -{Fore.BLUE}list{Style.RESET_ALL}: Show a list of active sessions\n    -{Fore.BLUE}select {Fore.RED}[ID]{Style.RESET_ALL}: Select a session to interact with\n"
+
+    def sessionHelp(self) -> str:
         """
         Handles the overall help menu when in session
         
@@ -229,7 +239,7 @@ class HelpCenter():
         
         return f"Modules:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows commands for each module\n     - {Fore.BLUE}shell{Style.RESET_ALL}: Opens a shell on the victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the session\n"
 
-    def shellModuleHelp(self) -> None:
+    def shellModuleHelp(self) -> str:
         return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
 
 class Commands():
@@ -380,6 +390,8 @@ class CommandCenter(Commands, HelpCenter):
                 elif command[:7] == 'select ':
                     self.listTargets(False)
                     self.conn = self.selectTarget(command)
+                elif command == 'help':
+                    print(self.selectHelp())
                 else:
                     try:
                         self.conn.send(str.encode(command))
