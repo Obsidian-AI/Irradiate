@@ -224,7 +224,7 @@ class HelpCenter():
         Handles the overall help menu when selecting a session
 
         Returns:
-            str: The String to print for the help menu
+            str: The Help Content
         """
 
         return f"Commands:\n    -{Fore.BLUE}help{Style.RESET_ALL}: Show this menu\n    -{Fore.BLUE}list{Style.RESET_ALL}: Show a list of active sessions\n    -{Fore.BLUE}select {Fore.RED}[ID]{Style.RESET_ALL}: Select a session to interact with\n"
@@ -234,12 +234,17 @@ class HelpCenter():
         Handles the overall help menu when in session
         
         Returns:
-            str: the help content
+            str: The Help Content
         """
         
         return f"Modules:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows commands for each module\n     - {Fore.BLUE}shell{Style.RESET_ALL}: Opens a shell on the victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the session\n"
 
     def shellModuleHelp(self) -> str:
+        """Handles the help menu for the shell module
+
+        Returns:
+            str: The Help Content
+        """
         return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
 
 class Commands():
