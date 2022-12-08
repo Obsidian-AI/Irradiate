@@ -245,7 +245,7 @@ class HelpCenter():
         Returns:
             str: The Help Content
         """
-        return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Fore.RED}[FILE NAME]{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}filesize {Fore.RED}[FILE NAME]{Style.RESET_ALL}: Shows the Size of a File on Client Machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
+        return f"Shell Module Help Menu:\n     - {Fore.BLUE}help{Style.RESET_ALL}: Shows this help menu\n     - {Fore.BLUE}download{Fore.RED}[FILE NAME]{Style.RESET_ALL}: Download files from victim machine\n     - {Fore.BLUE}upload {Fore.RED}[FILE NAME]{Style.RESET_ALL}: Upload file from Uploads Folder to Client\n     - {Fore.BLUE}filesize {Fore.RED}[FILE NAME]{Style.RESET_ALL}: Shows the Size of a File on Client Machine\n     - {Fore.BLUE}exit{Style.RESET_ALL}: Exits the shell\n"
 
 class Commands():
     def sysinfo(self, data: bytes) -> None:

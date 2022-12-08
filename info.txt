@@ -1,0 +1,10 @@
+Future Updates:
+- Upload Function
+- Persist Function
+- Make download function run in thread (useful for larger files)
+
+Current Commands:
+- Download File Function (Only in Shell Mode)
+- sysinfo
+- select a session
+- show all active sessions
