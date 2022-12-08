@@ -302,8 +302,10 @@ class Commands():
                 # Set the buffer size
                 buffSize = 1024
                 conn.send(str.encode(str(buffSize)))
+                fileSize = conn.recv(1024).decode()
 
                 # Loop to get all the data
+                counter = 0
                 while True:
                     try:
                         # Ask for Data
@@ -311,12 +313,15 @@ class Commands():
                         # Save the Data
                         if len(section) == buffSize:
                             file.write(section)
+                            counter += len(section)
+                            print(f"Downloaded {counter} bytes out of {fileSize} bytes", end='\r')
                             conn.send(str.encode("Next"))
                         else:
                             file.write(section)
+                            print(f"Downloaded {counter + len(section)} bytes")
                             break
                     except Exception as e:
-                        print(e)
+                        logging.error(f"Error Occurred at Download Function{e}")
             file.close()
         
 class CommandCenter(Commands, HelpCenter):
